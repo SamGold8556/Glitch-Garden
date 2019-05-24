@@ -18,6 +18,8 @@ public class Shooter : MonoBehaviour {
     }
 
 
+
+
     public void Fire()
     {
         Instantiate(projectileObject, gunObject.transform.position, Quaternion.identity);

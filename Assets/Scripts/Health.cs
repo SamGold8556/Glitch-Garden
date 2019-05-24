@@ -6,25 +6,40 @@ public class Health : MonoBehaviour {
 
     [SerializeField] int currentHealth = 100;
     Projectile collProjectile;
+    [SerializeField] GameObject deathVFX;
 
 	// Use this for initialization
 	void Start () {
-		
+        
 	}
-
-
-    private void OnTriggerEnter2D(Collider2D coll)
-    {
-        if(coll.tag == ("Projectile"))
-        {
-            currentHealth -= 100;
-        }
-    }
-
-
 
     // Update is called once per frame
     void Update () {
 		
 	}
+
+    public void damageDealt(int enemyDamage)
+    {
+        currentHealth -= enemyDamage;
+        if(currentHealth <= 0)
+        {
+            TriggerDeathFX();
+            Destroy(gameObject);         
+        }
+    }
+
+
+    private void TriggerDeathFX()
+    {
+        if(!deathVFX)
+        {
+            return;
+        }
+        else
+        {
+           GameObject deathFXObject = Instantiate(deathVFX, transform.position, Quaternion.identity);
+           Destroy(deathFXObject, 1f);
+        }
+    }
+
 }
